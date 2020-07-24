@@ -58,12 +58,12 @@ const Login = () => {
         flexDirection="column"
         p={3}
       >
-        <Typography variant="h4" className={classes.heading}>
-          Login Here
-        </Typography>
         <Box>
           <img src={logo} alt="logo" className={classes.image} />
         </Box>
+        <Typography variant="h4" className={classes.heading}>
+          Login Here
+        </Typography>
         <Box display="flex" flexDirection="column">
           <TextField
             variant="outlined"
