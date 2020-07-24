@@ -4,12 +4,14 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Navbar from "comps/layout/Navbar";
 import Home from "pages/Home";
 import AllMedicines from "pages/AllMedicines";
+import Login from "pages/Login";
+import Signup from "pages/Signup";
 
 function App() {
   return (
     <div className="App">
-      <Navbar>
-        <Router>
+      <Router>
+        <Navbar>
           <Switch>
             <Route path="/" exact>
               <Home />
@@ -21,14 +23,14 @@ function App() {
               <Home />
             </Route>
             <Route path="/login" exact>
-              <Home />
+              <Login />
             </Route>
             <Route path="/signup" exact>
-              <Home />
+              <Signup />
             </Route>
           </Switch>
-        </Router>
-      </Navbar>
+        </Navbar>
+      </Router>
     </div>
   );
 }

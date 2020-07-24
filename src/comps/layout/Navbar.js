@@ -10,6 +10,7 @@ import CancelIcon from "@material-ui/icons/Cancel";
 import styled from "styled-components";
 
 import Logo from "assets/logo2.png";
+import NavLink from "comps/StyledLink";
 
 const Navbar = ({ children }) => {
   const [open, setOpen] = useState(false);
@@ -49,8 +50,8 @@ const Navbar = ({ children }) => {
               style={{ height: "77px", width: "87px", marginRight: "10px" }}
               aria-label="menu"
             /> */}
-            <Typography variant="h6" style={{ fontWeight: "bold" }}>
-              UTILMED
+            <Typography variant="h6">
+              <NavLink to="/" label="UTILMED" bold="700" />
             </Typography>
           </Box>
           <Hidden smDown>
@@ -59,11 +60,11 @@ const Navbar = ({ children }) => {
               display="flex"
               alignItems="center"
             >
-              <StyledLink>ALL Medicines</StyledLink>
-              <StyledLink>ALL Tipses</StyledLink>
-              <StyledLink>Login</StyledLink>
-              <StyledLink>Signup</StyledLink>
-              <StyledLink>Profile</StyledLink>
+              <NavLink to="/all-meds" label="all meds" />
+              <NavLink to="/all-tipses" label="All Tipses" />
+              <NavLink to="/login" label="Login" />
+              <NavLink to="/signup" label="Signup" />
+              <NavLink to="/profile" label="Profile" />
             </Box>
           </Hidden>
         </Toolbar>
@@ -77,11 +78,6 @@ const Navbar = ({ children }) => {
 };
 
 export default Navbar;
-
-const StyledLink = styled.p`
-  margin: 0px 15px;
-  font-weight: 500;
-`;
 
 const MobileMenuWrapper = styled.div`
   /* display: ${(props) => (props.open ? "flex" : "none")}; */
