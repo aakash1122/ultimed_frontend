@@ -21,6 +21,11 @@ const styles = makeStyles((theme) => ({
     padding: "10px",
     boxShadow: "0px 5px 10px -2px #c2c2c2",
     margin: "5px 5px",
+    transition: "all 0.3s ease",
+    " &:hover": {
+      transform: "translateY(2px)",
+      boxShadow: "none",
+    },
   },
 }));
 
