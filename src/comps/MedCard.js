@@ -9,9 +9,9 @@ import {
   CardMedia,
   CardActionArea,
 } from "@material-ui/core";
+import styled from "styled-components";
 
 import logo3 from "assets/logo3.png";
-import styled from "styled-components";
 
 const styles = makeStyles((theme) => ({
   root: {
@@ -29,8 +29,9 @@ const styles = makeStyles((theme) => ({
   },
 }));
 
-const MedCard = () => {
+const MedCard = ({ showDetail, item }) => {
   const classes = styles();
+
   return (
     <Card p={3} className={classes.root}>
       <CardActionArea style={{ padding: "5px" }}>
@@ -57,7 +58,12 @@ const MedCard = () => {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button variant="text" disableElevation color="primary">
+        <Button
+          variant="text"
+          disableElevation
+          color="primary"
+          onClick={() => showDetail(item)}
+        >
           View Detail
         </Button>
       </CardActions>
@@ -67,7 +73,7 @@ const MedCard = () => {
 
 export default MedCard;
 
-const StyledValue = styled.p`
+const StyledValue = styled.span`
   margin: 2px 0px 2px 5px;
   display: inline-block;
   font-weight: bold;

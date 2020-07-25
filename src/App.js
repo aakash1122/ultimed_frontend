@@ -6,7 +6,6 @@ import Home from "pages/Home";
 import AllMedicines from "pages/AllMedicines";
 import Login from "pages/Login";
 import Signup from "pages/Signup";
-import TipsCard from "comps/TipsCard";
 import AllTipses from "pages/AllTipses";
 
 function App() {
@@ -18,7 +17,7 @@ function App() {
             <Route path="/" exact>
               <Home />
             </Route>
-            <Route path="/all-meds" exact>
+            <Route path="/all-meds">
               <AllMedicines />
             </Route>
             <Route path="/all-tipses" exact>
