@@ -7,6 +7,7 @@ import AllMedicines from "pages/AllMedicines";
 import Login from "pages/Login";
 import Signup from "pages/Signup";
 import AllTipses from "pages/AllTipses";
+import AddTips from "pages/AddTips";
 
 function App() {
   return (
@@ -22,6 +23,9 @@ function App() {
             </Route>
             <Route path="/all-tipses" exact>
               <AllTipses />
+            </Route>
+            <Route path="/add/tips" exact>
+              <AddTips />
             </Route>
             <Route path="/login" exact>
               <Login />

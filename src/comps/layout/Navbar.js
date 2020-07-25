@@ -18,11 +18,12 @@ const Navbar = ({ children }) => {
   const MobileMenu = (
     <Hidden mdUp>
       <MobileMenuWrapper open={open}>
-        <MobileMenuLink>ALL Medicines</MobileMenuLink>
-        <MobileMenuLink>ALL Tipses</MobileMenuLink>
-        <MobileMenuLink>Login</MobileMenuLink>
-        <MobileMenuLink>Signup</MobileMenuLink>
-        <MobileMenuLink>Profile</MobileMenuLink>
+        <MobileMenuLink to="/all-meds" label="all meds" mb />
+        <MobileMenuLink to="/all-tipses" label="All Tipses" mb />
+        <MobileMenuLink to="/add/tips" label="ADD TIPS" mb />
+        <MobileMenuLink to="/login" label="Login" mb />
+        <MobileMenuLink to="/signup" label="Signup" mb />
+        <MobileMenuLink to="/profile" label="Profile" mb />
         <CancelIcon
           onClick={() => setOpen(false)}
           style={{ marginTop: "20px" }}
@@ -51,7 +52,7 @@ const Navbar = ({ children }) => {
               aria-label="menu"
             /> */}
             <Typography variant="h6">
-              <NavLink to="/" label="UTILMED" bold="700" />
+              <NavLink to="/" label="UTILMED" bold="700" size="20" />
             </Typography>
           </Box>
           <Hidden smDown>
@@ -62,6 +63,7 @@ const Navbar = ({ children }) => {
             >
               <NavLink to="/all-meds" label="all meds" />
               <NavLink to="/all-tipses" label="All Tipses" />
+              <NavLink to="/add/tips" label="ADD TIPS" />
               <NavLink to="/login" label="Login" />
               <NavLink to="/signup" label="Signup" />
               <NavLink to="/profile" label="Profile" />
@@ -80,11 +82,10 @@ const Navbar = ({ children }) => {
 export default Navbar;
 
 const MobileMenuWrapper = styled.div`
-  /* display: ${(props) => (props.open ? "flex" : "none")}; */
-  height:${(props) => (props.open ? "auto" : "0px !important")};
-  width:${(props) => (props.open ? "auto" : "0px")};
-  overflow:hidden;
-  display:flex;
+  height: ${(props) => (props.open ? "auto" : "0px !important")};
+  width: ${(props) => (props.open ? "auto" : "0px")};
+  overflow: hidden;
+  display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
@@ -97,8 +98,8 @@ const MobileMenuWrapper = styled.div`
   transition: all 0.4s cubic-bezier(0, 0.79, 0.46, 1.07);
 `;
 
-const MobileMenuLink = styled.p`
-  margin: 10px auto;
+const MobileMenuLink = styled(NavLink)`
+  /* margin: 10px auto !important; */
   color: #fff;
   font-size: 20px;
   font-weight: bold;
