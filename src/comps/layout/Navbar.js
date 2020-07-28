@@ -21,6 +21,7 @@ const Navbar = ({ children }) => {
         <MobileMenuLink to="/all-meds" label="all meds" mb />
         <MobileMenuLink to="/all-tipses" label="All Tipses" mb />
         <MobileMenuLink to="/add/tips" label="ADD TIPS" mb />
+        <MobileMenuLink to="/add/medicine" label="ADD Medicine" mb />
         <MobileMenuLink to="/login" label="Login" mb />
         <MobileMenuLink to="/signup" label="Signup" mb />
         <MobileMenuLink to="/profile" label="Profile" mb />
@@ -64,6 +65,7 @@ const Navbar = ({ children }) => {
               <NavLink to="/all-meds" label="all meds" />
               <NavLink to="/all-tipses" label="All Tipses" />
               <NavLink to="/add/tips" label="ADD TIPS" />
+              <NavLink to="add/medicine" label="Add Medicine" />
               <NavLink to="/login" label="Login" />
               <NavLink to="/signup" label="Signup" />
               <NavLink to="/profile" label="Profile" />
