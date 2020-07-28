@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
   Select,
   TextField,
@@ -9,14 +9,28 @@ import {
   Grid,
 } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
+import axios from "axios";
+
+import { MyContext } from "context/context";
 
 const SearchForm = () => {
-  const [type, setType] = useState("brand");
+  const [state, dispatch] = useContext(MyContext);
+
+  const [type, setType] = useState("name");
   const [search, setSearch] = useState("");
 
-  const searchMed = () => {
-    // api call
-    console.log(type, search);
+  const searchMed = async () => {
+    dispatch({ type: "SEARCH_MED" });
+    try {
+      // api call
+      const resp = await axios.post(
+        `${process.env.REACT_APP_API}/medicine/search`,
+        { query: search, searchType: type }
+      );
+      dispatch({ type: "FINISH_SEARCH_MED", payload: resp.data });
+    } catch (error) {
+      dispatch({ type: "FINISH_SEARCH_MED", payload: [] });
+    }
   };
 
   return (
@@ -56,8 +70,8 @@ const SearchForm = () => {
                 setType(e.target.value);
               }}
             >
-              <MenuItem value="brand">Brand</MenuItem>
-              <MenuItem value="generic">Generic</MenuItem>
+              <MenuItem value="name">Brand</MenuItem>
+              <MenuItem value="group">Generic</MenuItem>
             </Select>
           </FormControl>
         </Grid>

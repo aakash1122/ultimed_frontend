@@ -13,6 +13,11 @@ const initalState = {
   },
   tipses: [],
   Meds: [],
+  search: {
+    loading: false,
+    data: [],
+    searched: false,
+  },
 };
 
 const reducer = (state = initalState, action) => {
@@ -49,6 +54,24 @@ const reducer = (state = initalState, action) => {
           name: "",
           email: "",
           token: "",
+        },
+      };
+    case "SEARCH_MED":
+      return {
+        ...state,
+        search: {
+          ...state.search,
+          loading: true,
+          searched: true,
+        },
+      };
+    case "FINISH_SEARCH_MED":
+      return {
+        ...state,
+        search: {
+          ...state.search,
+          loading: false,
+          data: action.payload,
         },
       };
     default:

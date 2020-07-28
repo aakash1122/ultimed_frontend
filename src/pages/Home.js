@@ -1,19 +1,37 @@
-import React from "react";
+import React, { useContext } from "react";
+import styled from "styled-components";
 
 import Header from "comps/Header";
 import MedCard from "comps/MedCard";
-import styled from "styled-components";
+import { MyContext } from "context/context";
+import { CircularProgress, Grid } from "@material-ui/core";
 
 const Home = () => {
+  const [state, dispatch] = useContext(MyContext);
+
+  const { search } = state;
+
   return (
     <div>
       <Header />
       <StyledWrapper>
-        <MedCard />
-        <MedCard />
-        <MedCard />
-        {/* <MedCard /> */}
-        {/* <MedCard /> */}
+        {search.loading ? (
+          <CircularProgress />
+        ) : (
+          <>
+            {search.searched && !search.data.length && (
+              <h1>Medicine not found</h1>
+            )}
+            <Grid container spacing={3}>
+              {search.data.length > 0 &&
+                search.data.map(({ data, i }) => (
+                  <Grid item xs={12} sm={6} md={6} lg={3}>
+                    <MedCard data={data} key={i} />
+                  </Grid>
+                ))}
+            </Grid>
+          </>
+        )}
       </StyledWrapper>
     </div>
   );

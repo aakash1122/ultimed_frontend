@@ -15,6 +15,7 @@ import {
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import axios from "axios";
+import { useHistory } from "react-router-dom";
 
 import logo from "assets/logo3.png";
 import { MyContext } from "context/context";
@@ -47,6 +48,8 @@ const styles = makeStyles((theme) => ({
 }));
 
 const Login = () => {
+  const history = useHistory();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPass, setShowPass] = useState(false);
@@ -72,6 +75,7 @@ const Login = () => {
         if (resp.status === 200) {
           dispatch({ type: "FINISH_LOGIN", payload: resp.data });
           localStorage.setItem("user", JSON.stringify(resp.data));
+          history.push("/");
         }
       } catch (error) {
         console.log(error);
