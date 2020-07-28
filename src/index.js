@@ -6,11 +6,14 @@ import * as serviceWorker from "./serviceWorker";
 import { ThemeProvider } from "@material-ui/styles";
 
 import { THEME } from "theme/provider";
+import AppContext from "context/context";
 
 ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider theme={THEME}>
-      <App />
+      <AppContext>
+        <App />
+      </AppContext>
     </ThemeProvider>
   </React.StrictMode>,
   document.getElementById("root")

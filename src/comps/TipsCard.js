@@ -9,6 +9,7 @@ import {
   Button,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
+import { useHistory } from "react-router-dom";
 
 const styles = makeStyles((theme) => ({
   root: {
@@ -32,6 +33,7 @@ const styles = makeStyles((theme) => ({
 }));
 
 const TipsCard = () => {
+  const history = useHistory();
   const classes = styles();
 
   return (
@@ -51,7 +53,9 @@ const TipsCard = () => {
         subheader="September 14, 2016"
       />
       <CardActions>
-        <Button color="primary">Read More</Button>
+        <Button color="primary" onClick={() => history.push("/all-tipses/123")}>
+          Read More
+        </Button>
       </CardActions>
     </Card>
   );

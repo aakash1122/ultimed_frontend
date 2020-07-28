@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import Navbar from "comps/layout/Navbar";
@@ -13,7 +13,18 @@ import Profile from "pages/Profile";
 import ViewTipsDetail from "pages/ViewTipsDetail";
 import AddMedicine from "pages/AddMedicine";
 
+import { MyContext } from "context/context";
+
 function App() {
+  const [state, dispatch] = useContext(MyContext);
+
+  useEffect(() => {
+    const user = localStorage.getItem("user");
+    if (user) {
+      dispatch({ type: "FINISH_LOGIN", payload: JSON.parse(user) });
+    }
+  }, []);
+
   return (
     <div className="App">
       <Router>

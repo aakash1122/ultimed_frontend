@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
   TextField,
   Button,
@@ -13,8 +13,10 @@ import {
 } from "@material-ui/core";
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
+import axios from "axios";
 
 import logo from "assets/logo3.png";
+import { MyContext } from "context/context";
 
 const styles = makeStyles((theme) => ({
   inp: {
@@ -47,7 +49,32 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [showPass, setShowPass] = useState(false);
 
+  const [state, dispatch] = useContext(MyContext);
+
   const classes = styles();
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    if (email && password) {
+      try {
+        const resp = await axios.post(
+          `${process.env.REACT_APP_API}/auth/login`,
+          {
+            email,
+            password,
+          }
+        );
+        if (resp.status === 200) {
+          console.log("finished logged in");
+          dispatch({ type: "FINISH_LOGIN", payload: resp.data });
+          localStorage.setItem("user", JSON.stringify(resp.data));
+        } else {
+          alert("wrong Credentials");
+        }
+        console.log(resp);
+      } catch (error) {}
+    }
+  };
 
   return (
     <Container>
@@ -64,48 +91,54 @@ const Login = () => {
         <Typography variant="h4" className={classes.heading}>
           Login Here
         </Typography>
-        <Box display="flex" flexDirection="column">
-          <TextField
-            variant="outlined"
-            placeholder="Email"
-            value={email}
-            size="medium"
-            className={classes.inp}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <FormControl variant="outlined">
-            <OutlinedInput
-              id="outlined-pass"
-              type={showPass ? "text" : "password"}
-              value={password}
+        <form onSubmit={handleLogin}>
+          <Box display="flex" flexDirection="column">
+            <TextField
+              variant="outlined"
+              placeholder="Email"
+              value={email}
               size="medium"
-              placeholder="Password"
+              type="email"
+              required
               className={classes.inp}
-              onChange={(e) => setPassword(e.target.value)}
-              endAdornment={
-                <InputAdornment position="end">
-                  <IconButton
-                    aria-label="toggle password visibility"
-                    onClick={() => setShowPass(!showPass)}
-                    edge="end"
-                  >
-                    {showPass ? <Visibility /> : <VisibilityOff />}
-                  </IconButton>
-                </InputAdornment>
-              }
+              onChange={(e) => setEmail(e.target.value)}
             />
-          </FormControl>
+            <FormControl variant="outlined">
+              <OutlinedInput
+                id="outlined-pass"
+                type={showPass ? "text" : "password"}
+                value={password}
+                size="medium"
+                required
+                placeholder="Password"
+                className={classes.inp}
+                onChange={(e) => setPassword(e.target.value)}
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={() => setShowPass(!showPass)}
+                      edge="end"
+                    >
+                      {showPass ? <Visibility /> : <VisibilityOff />}
+                    </IconButton>
+                  </InputAdornment>
+                }
+              />
+            </FormControl>
 
-          <Button
-            variant="contained"
-            size="large"
-            color="primary"
-            disableElevation
-            className={classes.button}
-          >
-            LOGIN
-          </Button>
-        </Box>
+            <Button
+              variant="contained"
+              size="large"
+              color="primary"
+              type="submit"
+              disableElevation
+              className={classes.button}
+            >
+              LOGIN
+            </Button>
+          </Box>
+        </form>
       </Box>
     </Container>
   );

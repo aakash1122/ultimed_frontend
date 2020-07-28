@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Container from "@material-ui/core/Container";
@@ -8,11 +8,20 @@ import Box from "@material-ui/core/Box";
 import MenuIcon from "@material-ui/icons/Menu";
 import CancelIcon from "@material-ui/icons/Cancel";
 import styled from "styled-components";
+import { useHistory } from "react-router-dom";
 
 import Logo from "assets/logo2.png";
 import NavLink from "comps/StyledLink";
 
+import { MyContext } from "context/context";
+import { Button } from "@material-ui/core";
+
 const Navbar = ({ children }) => {
+  const [state, dispatch] = useContext(MyContext);
+  const { user } = state;
+
+  const history = useHistory();
+
   const [open, setOpen] = useState(false);
 
   const MobileMenu = (
@@ -20,11 +29,29 @@ const Navbar = ({ children }) => {
       <MobileMenuWrapper open={open}>
         <MobileMenuLink to="/all-meds" label="all meds" mb />
         <MobileMenuLink to="/all-tipses" label="All Tipses" mb />
-        <MobileMenuLink to="/add/tips" label="ADD TIPS" mb />
-        <MobileMenuLink to="/add/medicine" label="ADD Medicine" mb />
-        <MobileMenuLink to="/login" label="Login" mb />
-        <MobileMenuLink to="/signup" label="Signup" mb />
-        <MobileMenuLink to="/profile" label="Profile" mb />
+        {user.loggedIn ? (
+          <>
+            <MobileMenuLink to="/add/tips" label="ADD TIPS" mb />
+            <MobileMenuLink to="/add/medicine" label="ADD Medicine" mb />
+            <MobileMenuLink to="/profile" label="Profile" mb />
+            <Button
+              variant="contained"
+              color="secondary"
+              style={{ fontWeight: "bold" }}
+              onCLick={() => {
+                localStorage.removeItem("user");
+                history.push("/login");
+              }}
+            >
+              Logout
+            </Button>
+          </>
+        ) : (
+          <>
+            <MobileMenuLink to="/login" label="Login" mb />
+            <MobileMenuLink to="/signup" label="Signup" mb />
+          </>
+        )}
         <CancelIcon
           onClick={() => setOpen(false)}
           style={{ marginTop: "20px" }}
@@ -64,11 +91,32 @@ const Navbar = ({ children }) => {
             >
               <NavLink to="/all-meds" label="all meds" />
               <NavLink to="/all-tipses" label="All Tipses" />
-              <NavLink to="/add/tips" label="ADD TIPS" />
-              <NavLink to="add/medicine" label="Add Medicine" />
-              <NavLink to="/login" label="Login" />
-              <NavLink to="/signup" label="Signup" />
-              <NavLink to="/profile" label="Profile" />
+              {user.loggedIn ? (
+                <>
+                  <NavLink to="/add/tips" label="ADD TIPS" />
+                  <NavLink to="add/medicine" label="Add Medicine" />
+                  <NavLink to="/profile" label="Profile" />
+                  <Button
+                    variant="contained"
+                    color="secondary"
+                    disableElevation
+                    style={{ fontWeight: "bold" }}
+                    onClick={() => {
+                      dispatch({ type: "LOGOUT" });
+                      localStorage.removeItem("user");
+                      history.push("/login");
+                    }}
+                  >
+                    {" "}
+                    Logout
+                  </Button>
+                </>
+              ) : (
+                <>
+                  <NavLink to="/login" label="Login" />
+                  <NavLink to="/signup" label="Signup" />
+                </>
+              )}
             </Box>
           </Hidden>
         </Toolbar>

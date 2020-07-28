@@ -12,7 +12,7 @@ const NavLink = ({ to, label, bold, size, mb }) => {
 
 const StyleLink = styled(Link)`
   text-decoration: none;
-  font-weight: ${(props) => (props.bold ? props.bold : "500")};
+  font-weight: ${(props) => (props.bold ? props.bold : "600")};
   color: #fff;
   text-transform: uppercase;
   /* margin: 0px 14px; */
