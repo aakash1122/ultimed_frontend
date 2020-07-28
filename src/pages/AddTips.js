@@ -1,16 +1,15 @@
 import React, { useState } from "react";
-import { TextField, Grid, Button, Card, Typography } from "@material-ui/core";
+import { TextField, Grid, Button, Card } from "@material-ui/core";
 import ReactQuill from "react-quill";
+import styled from "styled-components";
 import "react-quill/dist/quill.snow.css";
 
 import ViewTips from "comps/ViewTips";
 
 const AddTips = () => {
-  const [title, setTitle] = useState("how to stop hairfall in 10 mins");
-  const [imageUrl, setImageUrl] = useState(
-    "https://images.unsplash.com/photo-1595666225614-6886bfcce4cb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80"
-  );
-  const [body, setBody] = useState("some randome descriptdjfalfjsdl");
+  const [title, setTitle] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
+  const [body, setBody] = useState("");
 
   const formData = {
     title,
@@ -64,10 +63,16 @@ const AddTips = () => {
           </Grid>
         </form>
       </Card>
-      {title || body ? <Typography variant="h6"> Preview</Typography> : null}
+      {title || body ? <PreviewText>Live Preview</PreviewText> : null}
       <ViewTips data={formData} />
     </div>
   );
 };
 
 export default AddTips;
+
+const PreviewText = styled.p`
+  font-size: 26px;
+  margin: 20px 0px 0px 0px;
+  font-weight: normal;
+`;

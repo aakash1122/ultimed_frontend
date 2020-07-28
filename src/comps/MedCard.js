@@ -10,6 +10,7 @@ import {
   CardActionArea,
 } from "@material-ui/core";
 import styled from "styled-components";
+import { useHistory } from "react-router-dom";
 
 import logo3 from "assets/logo3.png";
 
@@ -29,7 +30,9 @@ const styles = makeStyles((theme) => ({
   },
 }));
 
-const MedCard = ({ showDetail, item }) => {
+const MedCard = () => {
+  const history = useHistory();
+
   const classes = styles();
 
   return (
@@ -62,7 +65,7 @@ const MedCard = ({ showDetail, item }) => {
           variant="text"
           disableElevation
           color="primary"
-          onClick={() => showDetail(item)}
+          onClick={() => history.push("/all-meds/123")}
         >
           View Detail
         </Button>

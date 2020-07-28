@@ -1,7 +1,5 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import Modal from "@material-ui/core/Modal";
-import Button from "@material-ui/core/Button";
 import {
   Card,
   CardMedia,
@@ -17,19 +15,16 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import logo3 from "assets/logo3.png";
 
 const useStyles = makeStyles((theme) => ({
-  paper: {
+  root: {
     position: "absolute",
-    width: 400,
-    backgroundColor: theme.palette.background.paper,
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing(4, 6, 4),
+    width: 450,
+    padding: theme.spacing(3, 4, 3),
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
     borderRadius: "10px",
     [theme.breakpoints.down("sm")]: {
-      width: "90%",
-      overflowY: "scroll",
+      width: "100%",
     },
   },
   heading: {
@@ -39,19 +34,14 @@ const useStyles = makeStyles((theme) => ({
   detail: {
     background: "#f7f7f7",
     boxShadow: "none",
-    [theme.breakpoints.down("sm")]: {
-      maxHeight: "200px",
-      overflowY: "scroll",
-    },
   },
 }));
 
-const MedModal = ({ value, set }) => {
+const MedDetail = () => {
   const classes = useStyles();
-
-  const body = (
-    <div className={classes.paper}>
-      <Card>
+  return (
+    <>
+      <Card className={classes.root}>
         <CardMedia
           component="img"
           alt="Contemplative Reptile"
@@ -96,30 +86,8 @@ const MedModal = ({ value, set }) => {
           </Accordion>
         </CardContent>
       </Card>
-      <Button
-        variant="outlined"
-        color="secondary"
-        disableElevation
-        style={{ margin: "20px 0px 5px auto", display: "block" }}
-        onClick={() => set(false)}
-      >
-        Close
-      </Button>
-    </div>
-  );
-
-  return (
-    <div>
-      <Modal
-        open={value}
-        onClose={() => set(false)}
-        aria-labelledby="simple-modal-title"
-        aria-describedby="simple-modal-description"
-      >
-        {body}
-      </Modal>
-    </div>
+    </>
   );
 };
 
-export default MedModal;
+export default MedDetail;

@@ -8,6 +8,8 @@ import Login from "pages/Login";
 import Signup from "pages/Signup";
 import AllTipses from "pages/AllTipses";
 import AddTips from "pages/AddTips";
+import MedDetail from "comps/MedDetail";
+import Profile from "pages/Profile";
 
 function App() {
   return (
@@ -18,8 +20,11 @@ function App() {
             <Route path="/" exact>
               <Home />
             </Route>
-            <Route path="/all-meds">
+            <Route path="/all-meds" exact>
               <AllMedicines />
+            </Route>
+            <Route path="/all-meds/:id" exact>
+              <MedDetail />
             </Route>
             <Route path="/all-tipses" exact>
               <AllTipses />
@@ -32,6 +37,9 @@ function App() {
             </Route>
             <Route path="/signup" exact>
               <Signup />
+            </Route>
+            <Route path="/profile" exact>
+              <Profile />
             </Route>
           </Switch>
         </Navbar>
