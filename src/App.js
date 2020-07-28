@@ -11,6 +11,7 @@ import AddTips from "pages/AddTips";
 import MedDetail from "comps/MedDetail";
 import Profile from "pages/Profile";
 import ViewTipsDetail from "pages/ViewTipsDetail";
+import AddMedicine from "pages/AddMedicine";
 
 function App() {
   return (
@@ -32,6 +33,9 @@ function App() {
             </Route>
             <Route path="/add/tips" exact>
               <AddTips />
+            </Route>
+            <Route path="/add/medicine" exact>
+              <AddMedicine />
             </Route>
             <Route path="/all-tipses/:id" exact>
               <ViewTipsDetail />
