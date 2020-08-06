@@ -7,7 +7,7 @@ import main from "assets/main.svg";
 import SearchForm from "comps/SearchForm";
 import HeaderCard from "comps/HeaderCard";
 
-const Header = ({ set }) => {
+const Header = () => {
   return (
     <div>
       <Container>

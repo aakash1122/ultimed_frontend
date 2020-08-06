@@ -12,7 +12,11 @@ const initalState = {
     loading: false,
   },
   tipses: [],
-  Meds: [],
+  meds: {
+    allMeds: [],
+    loading: false,
+    error: "",
+  },
   search: {
     loading: false,
     data: [],
@@ -72,6 +76,33 @@ const reducer = (state = initalState, action) => {
           ...state.search,
           loading: false,
           data: action.payload,
+        },
+      };
+    //? all meds
+    case "START_FETCH_MED":
+      return {
+        ...state,
+        meds: {
+          ...state.meds,
+          loading: true,
+        },
+      };
+    case "FINISH_FETCH_MED":
+      return {
+        ...state,
+        meds: {
+          ...state.meds,
+          loading: false,
+          allMeds: action.payload,
+        },
+      };
+    case "ERROR_FETCH_MED":
+      return {
+        ...state,
+        meds: {
+          ...state.meds,
+          loading: false,
+          error: action.payload,
         },
       };
     default:

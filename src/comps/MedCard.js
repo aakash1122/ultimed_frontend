@@ -30,7 +30,7 @@ const styles = makeStyles((theme) => ({
   },
 }));
 
-const MedCard = () => {
+const MedCard = ({ data }) => {
   const history = useHistory();
 
   const classes = styles();
@@ -48,16 +48,16 @@ const MedCard = () => {
         />
       </CardActionArea>
       <CardContent>
-        <Typography variant="h6">ANGILOCK 50</Typography>
+        <Typography variant="h6">{data.name.toUpperCase()}</Typography>
         <Typography variant="body2">
-          Group <StyledValue>Paracetamol</StyledValue>
+          Group <StyledValue>{data.group}</StyledValue>
         </Typography>
         <Typography variant="body2">
           Company
-          <StyledValue>SQuare</StyledValue>
+          <StyledValue>{data.company}</StyledValue>
         </Typography>
         <Typography variant="body2">
-          Price <StyledValue>20</StyledValue>
+          Price <StyledValue>{data.price}</StyledValue>
         </Typography>
       </CardContent>
       <CardActions>
