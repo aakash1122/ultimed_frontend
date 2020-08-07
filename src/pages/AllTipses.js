@@ -1,11 +1,55 @@
-import React from "react";
-import { Grid, Typography } from "@material-ui/core";
+import React, { useContext, useEffect, useState } from "react";
+import { Grid, Typography, CircularProgress } from "@material-ui/core";
 
 import TipsCard from "comps/TipsCard";
-
-const arr = [1, 2, 3, 4, 5, 6, 7, 7, 8, 9, 90];
+import { MyContext } from "context/context";
+import InfiniteScroll from "react-infinite-scroll-component";
+import Axios from "axios";
 
 const AllTipses = () => {
+  const [state, dispatch] = useContext(MyContext);
+  // pull out tipses object from state
+  const { tipses } = state;
+
+  const [tipsData, setTipsData] = useState([]);
+  const [hasMore, setHaseMore] = useState(true);
+
+  const fetchTips = async () => {
+    try {
+      dispatch({ type: "START_FETCH_TIPS" });
+      const { data } = await Axios.get(`${process.env.REACT_APP_API}/tips/all`);
+      dispatch({ type: "FINISH_FETCH_TIPS", payload: data });
+      //keep 10 data to render
+      setTipsData(data.slice(0, 6));
+      if (data.length < 6) setHaseMore(false);
+    } catch (error) {
+      dispatch({ type: "ERROR_FETCH_TIPS", payload: error });
+    }
+  };
+
+  const fetchMore = () => {
+    console.log("fetching again");
+    console.log(tipses.allTips.length === tipsData.length);
+    setTimeout(() => {
+      if (tipses.allTips.length === tipsData.length) {
+        return setHaseMore(false);
+      }
+      setTipsData(
+        tipsData.concat(
+          tipses.allTipses.slice(tipsData.length, tipsData.length + 6)
+        )
+      );
+    }, 600);
+  };
+
+  useEffect(() => {
+    // * if data available then dont fetch
+    if (!tipses.allTips.length > 0) {
+      fetchTips();
+    }
+    setTipsData(tipses.allTips.slice(0, 12));
+  }, [fetchTips]);
+
   return (
     <div>
       <Typography
@@ -18,13 +62,35 @@ const AllTipses = () => {
       >
         Health Tipses
       </Typography>
-      <Grid container spacing={2} direction="row" alignItems="center">
-        {arr.map((item) => (
-          <Grid item xs={12} sm={6} md={4}>
-            <TipsCard />
+
+      {tipses.loading ? (
+        <CircularProgress style={{ display: "block", margin: "auto" }} />
+      ) : (
+        <InfiniteScroll
+          dataLength={tipsData} //This is important field to render the next data
+          next={fetchMore}
+          hasMore={hasMore}
+          loader={
+            <CircularProgress
+              style={{ display: "block", margin: "10px auto" }}
+            />
+          }
+          endMessage={
+            <p style={{ textAlign: "center" }}>
+              <b>Yay! You have seen it all</b>
+            </p>
+          }
+          style={{ overflow: "hidden" }}
+        >
+          <Grid container spacing={2} direction="row" alignItems="center">
+            {tipsData.map((item) => (
+              <Grid item xs={12} sm={6} md={4} key={item._id}>
+                <TipsCard data={item} />
+              </Grid>
+            ))}
           </Grid>
-        ))}
-      </Grid>
+        </InfiniteScroll>
+      )}
     </div>
   );
 };

@@ -11,7 +11,11 @@ const initalState = {
     token: "",
     loading: false,
   },
-  tipses: [],
+  tipses: {
+    allTips: [],
+    loading: false,
+    error: "",
+  },
   meds: {
     allMeds: [],
     loading: false,
@@ -101,6 +105,33 @@ const reducer = (state = initalState, action) => {
         ...state,
         meds: {
           ...state.meds,
+          loading: false,
+          error: action.payload,
+        },
+      };
+    // ? tips
+    case "START_FETCH_TIPS":
+      return {
+        ...state,
+        tipses: {
+          ...state.tipses,
+          loading: true,
+        },
+      };
+    case "FINISH_FETCH_TIPS":
+      return {
+        ...state,
+        tipses: {
+          ...state.tipses,
+          loading: false,
+          allTips: action.payload,
+        },
+      };
+    case "FAIL_FETCH_TIPS":
+      return {
+        ...state,
+        tipses: {
+          ...state.tipses,
           loading: false,
           error: action.payload,
         },

@@ -27,6 +27,7 @@ const Navbar = ({ children }) => {
   const MobileMenu = (
     <Hidden mdUp>
       <MobileMenuWrapper open={open}>
+        <MobileMenuLink to="/" label="Home" mb />
         <MobileMenuLink to="/all-meds" label="all meds" mb />
         <MobileMenuLink to="/all-tipses" label="All Tipses" mb />
         {user.loggedIn ? (
@@ -94,7 +95,7 @@ const Navbar = ({ children }) => {
               {user.loggedIn ? (
                 <>
                   <NavLink to="/add/tips" label="ADD TIPS" />
-                  <NavLink to="add/medicine" label="Add Medicine" />
+                  <NavLink to="/add/medicine" label="Add Medicine" />
                   <NavLink to="/profile" label="Profile" />
                   <Button
                     variant="contained"
