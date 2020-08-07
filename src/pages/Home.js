@@ -11,6 +11,8 @@ const Home = () => {
 
   const { search } = state;
 
+  console.log(search.data);
+
   return (
     <div>
       <Header />
@@ -24,7 +26,7 @@ const Home = () => {
             )}
             <Grid container spacing={3}>
               {search.data.length > 0 &&
-                search.data.map(({ data, i }) => (
+                search.data.map((data, i) => (
                   <Grid item xs={12} sm={6} md={6} lg={3} key={i}>
                     <MedCard data={data} />
                   </Grid>

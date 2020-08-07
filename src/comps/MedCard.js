@@ -34,7 +34,6 @@ const MedCard = ({ data }) => {
   const history = useHistory();
 
   const classes = styles();
-
   return (
     <Card p={3} className={classes.root}>
       <CardActionArea style={{ padding: "5px" }}>
@@ -50,7 +49,7 @@ const MedCard = ({ data }) => {
       <CardContent>
         <Typography variant="h6">{data.name.toUpperCase()}</Typography>
         <Typography variant="body2">
-          Group <StyledValue>{data.group}</StyledValue>
+          Group <StyledValue>{data.groupName}</StyledValue>
         </Typography>
         <Typography variant="body2">
           Company
