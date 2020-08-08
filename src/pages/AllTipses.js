@@ -35,7 +35,7 @@ const AllTipses = () => {
       }
       setTipsData(
         tipsData.concat(
-          tipses.allTipses.slice(tipsData.length, tipsData.length + 6)
+          tipses.allTips.slice(tipsData.length, tipsData.length + 6)
         )
       );
     }, 600);
@@ -45,11 +45,14 @@ const AllTipses = () => {
     // * if data available then dont fetch
     if (!tipses.allTips.length > 0) {
       fetchTips();
+      setHaseMore(false);
     }
     console.log(tipses.allTips.length, tipsData.length);
     if (tipses.allTips.length < 6) {
       setTipsData(tipses.allTips);
       setHaseMore(false);
+    } else {
+      setTipsData(tipses.allTips.slice(tipsData.length, tipsData.length + 6));
     }
   }, []);
 

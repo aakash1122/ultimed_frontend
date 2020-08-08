@@ -32,25 +32,28 @@ const styles = makeStyles((theme) => ({
   },
 }));
 
-const TipsCard = () => {
+const TipsCard = ({ data }) => {
   const history = useHistory();
   const classes = styles();
 
   return (
     <Card className={classes.root}>
       <CardMedia
-        image="https://images.unsplash.com/photo-1559087316-6b27308e53f6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=985&q=80"
+        image={data.imageUrl}
         title="Tips Image"
         className={classes.image}
       />
       <Typography variant="h6" className={classes.title}>
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatum,
-        aperiam?
+        {data.title}
       </Typography>
       <CardHeader
-        avatar={<Avatar className={classes.avatar}>A</Avatar>}
-        title="Shrimp and Chorizo Paella"
-        subheader="September 14, 2016"
+        avatar={
+          <Avatar className={classes.avatar}>
+            {data.author.name.slice(0, 1).toUpperCase()}
+          </Avatar>
+        }
+        title={data.author.name.toUpperCase()}
+        subheader={new Date(data.created_at).toDateString()}
       />
       <CardActions>
         <Button color="primary" onClick={() => history.push("/all-tipses/123")}>
