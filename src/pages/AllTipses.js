@@ -21,7 +21,7 @@ const AllTipses = () => {
       dispatch({ type: "FINISH_FETCH_TIPS", payload: data });
       //keep 10 data to render
       setTipsData(data.slice(0, 6));
-      if (data.length < 6) setHaseMore(false);
+      if (data.length < 6) return setHaseMore(false);
     } catch (error) {
       dispatch({ type: "ERROR_FETCH_TIPS", payload: error });
     }
@@ -29,7 +29,6 @@ const AllTipses = () => {
 
   const fetchMore = () => {
     console.log("fetching again");
-    console.log(tipses.allTips.length === tipsData.length);
     setTimeout(() => {
       if (tipses.allTips.length === tipsData.length) {
         return setHaseMore(false);
@@ -47,8 +46,12 @@ const AllTipses = () => {
     if (!tipses.allTips.length > 0) {
       fetchTips();
     }
-    setTipsData(tipses.allTips.slice(0, 12));
-  }, [fetchTips]);
+    console.log(tipses.allTips.length, tipsData.length);
+    if (tipses.allTips.length < 6) {
+      setTipsData(tipses.allTips);
+      setHaseMore(false);
+    }
+  }, []);
 
   return (
     <div>
