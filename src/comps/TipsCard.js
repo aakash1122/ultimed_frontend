@@ -56,7 +56,10 @@ const TipsCard = ({ data }) => {
         subheader={new Date(data.created_at).toDateString()}
       />
       <CardActions>
-        <Button color="primary" onClick={() => history.push("/all-tipses/123")}>
+        <Button
+          color="primary"
+          onClick={() => history.push(`/all-tipses/${data._id}`)}
+        >
           Read More
         </Button>
       </CardActions>

@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Grid, Typography, CircularProgress } from "@material-ui/core";
+import InfiniteScroll from "react-infinite-scroll-component";
+import Axios from "axios";
 
 import TipsCard from "comps/TipsCard";
 import { MyContext } from "context/context";
-import InfiniteScroll from "react-infinite-scroll-component";
-import Axios from "axios";
 
 const AllTipses = () => {
   const [state, dispatch] = useContext(MyContext);
@@ -18,6 +18,7 @@ const AllTipses = () => {
     try {
       dispatch({ type: "START_FETCH_TIPS" });
       const { data } = await Axios.get(`${process.env.REACT_APP_API}/tips/all`);
+      console.log("tips fetched length, ", data.length);
       dispatch({ type: "FINISH_FETCH_TIPS", payload: data });
       //keep 10 data to render
       setTipsData(data.slice(0, 6));
@@ -45,16 +46,10 @@ const AllTipses = () => {
     // * if data available then dont fetch
     if (!tipses.allTips.length > 0) {
       fetchTips();
-      setHaseMore(false);
     }
-    console.log(tipses.allTips.length, tipsData.length);
-    if (tipses.allTips.length < 6) {
-      setTipsData(tipses.allTips);
-      setHaseMore(false);
-    } else {
-      setTipsData(tipses.allTips.slice(tipsData.length, tipsData.length + 6));
-    }
-  }, []);
+    setTipsData(tipses.allTips);
+    setHaseMore(false);
+  }, [fetchTips, tipses.allTips]);
 
   return (
     <div>

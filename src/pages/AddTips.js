@@ -171,7 +171,11 @@ const AddTips = () => {
             data={{
               title: watchTitle,
               imageUrl: watchImageUrl,
-              body: watchBody,
+              desc: watchBody,
+              created_at: Date.now(),
+              author: {
+                name: state.user.name,
+              },
             }}
           />
         </>

@@ -23,7 +23,7 @@ function App() {
     if (user) {
       dispatch({ type: "FINISH_LOGIN", payload: JSON.parse(user) });
     }
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className="App">

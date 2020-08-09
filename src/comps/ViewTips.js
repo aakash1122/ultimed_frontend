@@ -5,21 +5,26 @@ import styled from "styled-components";
 const ViewTips = ({ data }) => {
   return (
     <>
-      {data.title || data.body ? (
+      {data.title || data.desc ? (
         <Card style={{ margin: "30px 0px", padding: "30px", color: "#3f4c52" }}>
           <>
             <StyledImage src={data.imageUrl} alt="Tips Cover" />
             <Title>{data.title}</Title>
             <Divider />
             <div
-              dangerouslySetInnerHTML={{ __html: data.body }}
+              style={{ padding: "20px 0px", lineHeight: " 30px" }}
+              dangerouslySetInnerHTML={{ __html: data.desc }}
               id="tips-body"
             ></div>
             <Divider />
             <CardHeader
-              avatar={<Avatar style={{ background: "#f44336" }}>A</Avatar>}
-              title="Shrimp and Chorizo Paella"
-              subheader="September 14, 2016"
+              avatar={
+                <Avatar style={{ background: "#f44336" }}>
+                  {data.author.name.slice(0, 1).toUpperCase()}
+                </Avatar>
+              }
+              title={data.author.name.toUpperCase()}
+              subheader={new Date(data.created_at).toDateString()}
               style={{ padding: "15px 0px" }}
             />
           </>
