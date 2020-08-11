@@ -6,13 +6,17 @@ import {
   CardContent,
   Typography,
   Box,
+  CircularProgress,
 } from "@material-ui/core";
 import Accordion from "@material-ui/core/Accordion";
 import AccordionSummary from "@material-ui/core/AccordionSummary";
 import AccordionDetails from "@material-ui/core/AccordionDetails";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import { useQuery } from "react-query";
+import { useParams } from "react-router-dom";
 
 import logo3 from "assets/logo3.png";
+import Axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -39,6 +43,23 @@ const useStyles = makeStyles((theme) => ({
 
 const MedDetail = () => {
   const classes = useStyles();
+  const { id } = useParams();
+
+  const { isLoading, error, data } = useQuery("med", () =>
+    Axios.get(`${process.env.REACT_APP_API}/medicine/${id}`, {
+      id,
+    })
+  );
+
+  if (isLoading)
+    return <CircularProgress style={{ display: "block", margin: "0 auto" }} />;
+
+  if (error) return <h5>Error Occured</h5>;
+
+  console.log(data);
+
+  const med = data.data;
+
   return (
     <>
       <Card className={classes.root}>
@@ -56,12 +77,12 @@ const MedDetail = () => {
               variant="h6"
               style={{ textAlign: "center", marginBottom: "5px" }}
             >
-              ANGILOCK 60
+              {med.name}
             </Typography>
-            <Typography variant="body1">Group : algorianads</Typography>
-            <Typography variant="body2">Company : Beximco</Typography>
-            <Typography variant="body2">Unit price : 6 TK</Typography>
-            <Typography variant="body2">Pack Size : 10 </Typography>
+            <Typography variant="body1">Group : {med.groupName}</Typography>
+            <Typography variant="body2">Company : {med.company}</Typography>
+            <Typography variant="body2">Unit price : {med.price}</Typography>
+            <Typography variant="body2">Pack Size : {med.packSize} </Typography>
           </Box>
           <Accordion className={classes.detail}>
             <AccordionSummary
@@ -73,15 +94,7 @@ const MedDetail = () => {
               </Typography>
             </AccordionSummary>
             <AccordionDetails>
-              <Typography>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit
-                esse quod unde sapiente, sunt qui. Sunt quos excepturi
-                repellendus minima mollitia facere id animi fugiat sequi numquam
-                esse quod unde sapiente, sunt qui. Sunt quos excepturi
-                repellendus minima mollitia facere id animi fugiat sequi numquam
-                esse quod unde sapiente, sunt qui. Sunt quos excepturi
-                repellendus minima mollitia facere id animi fugiat sequi numquam
-              </Typography>
+              <Typography>{med.desc}</Typography>
             </AccordionDetails>
           </Accordion>
         </CardContent>

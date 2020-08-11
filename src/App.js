@@ -8,7 +8,7 @@ import Login from "pages/Login";
 import Signup from "pages/Signup";
 import AllTipses from "pages/AllTipses";
 import AddTips from "pages/AddTips";
-import MedDetail from "comps/MedDetail";
+import ViewMedDetail from "pages/ViewMedDetail";
 import Profile from "pages/Profile";
 import ViewTipsDetail from "pages/ViewTipsDetail";
 import AddMedicine from "pages/AddMedicine";
@@ -37,7 +37,7 @@ function App() {
               <AllMedicines />
             </Route>
             <Route path="/all-meds/:id" exact>
-              <MedDetail />
+              <ViewMedDetail />
             </Route>
             <Route path="/all-tipses" exact>
               <AllTipses />

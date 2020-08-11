@@ -64,7 +64,7 @@ const MedCard = ({ data }) => {
           variant="text"
           disableElevation
           color="primary"
-          onClick={() => history.push("/all-meds/123")}
+          onClick={() => history.push(`/all-meds/${data._id}`)}
         >
           View Detail
         </Button>
