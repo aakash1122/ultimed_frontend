@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const MedDetail = () => {
+const MedDetail = (props) => {
   const classes = useStyles();
   const { id } = useParams();
 

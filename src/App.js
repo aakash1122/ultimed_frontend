@@ -12,6 +12,7 @@ import ViewMedDetail from "pages/ViewMedDetail";
 import Profile from "pages/Profile";
 import ViewTipsDetail from "pages/ViewTipsDetail";
 import AddMedicine from "pages/AddMedicine";
+import UpdateMed from "pages/UpdateMed";
 
 import { MyContext } from "context/context";
 
@@ -47,6 +48,9 @@ function App() {
             </Route>
             <Route path="/add/medicine" exact>
               <AddMedicine />
+            </Route>
+            <Route path="/med/update/" exact>
+              <UpdateMed />
             </Route>
             <Route path="/all-tipses/:id" exact>
               <ViewTipsDetail />

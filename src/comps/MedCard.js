@@ -32,6 +32,7 @@ const styles = makeStyles((theme) => ({
 
 const MedCard = ({ data }) => {
   const history = useHistory();
+  const user = JSON.parse(localStorage.getItem("user"));
 
   const classes = styles();
   return (
@@ -59,7 +60,7 @@ const MedCard = ({ data }) => {
           Price <StyledValue>{data.price}</StyledValue>
         </Typography>
       </CardContent>
-      <CardActions>
+      <CardActions style={{ justifyContent: "space-between" }}>
         <Button
           variant="text"
           disableElevation
@@ -68,6 +69,16 @@ const MedCard = ({ data }) => {
         >
           View Detail
         </Button>
+        {user && user.data.isAdmin ? (
+          <Button
+            variant="text"
+            disableElevation
+            color="secondary"
+            onClick={() => history.push(`/med/update/`, { data })}
+          >
+            Edit
+          </Button>
+        ) : null}
       </CardActions>
     </Card>
   );
