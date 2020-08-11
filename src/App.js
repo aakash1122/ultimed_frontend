@@ -57,7 +57,7 @@ function App() {
             <Route path="/signup" exact>
               <Signup />
             </Route>
-            <Route path="/profile" exact>
+            <Route path="/profile/:id" exact>
               <Profile />
             </Route>
           </Switch>

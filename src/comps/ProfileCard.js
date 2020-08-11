@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ProfileCard = () => {
+const ProfileCard = ({ user }) => {
   const classes = useStyles();
   return (
     <div>
@@ -34,7 +34,9 @@ const ProfileCard = () => {
               alignItems="center"
               style={{ height: "100%", background: "aliceblue" }}
             >
-              <Avatar className={classes.large}>A</Avatar>
+              <Avatar className={classes.large}>
+                {user.name.slice(0, 1).toUpperCase()}
+              </Avatar>
             </Box>
           </Grid>
           <Grid item xs={12} md={7}>
@@ -42,23 +44,23 @@ const ProfileCard = () => {
               <Box>
                 <Box display="flex" alignItems="center">
                   <AccountCircleIcon />
-                  <StyledInfo>Anwar Aakash</StyledInfo>
+                  <StyledInfo>{user.name}</StyledInfo>
                 </Box>
                 <Box display="flex" alignItems="center">
                   <MailIcon />
-                  <StyledInfo>aakaashhssain@gmail.com</StyledInfo>
+                  <StyledInfo>{user.email}</StyledInfo>
                 </Box>
                 <Box display="flex" alignItems="center">
                   <PhoneAndroidIcon />
-                  <StyledInfo>01780809080</StyledInfo>
+                  <StyledInfo>{user.phone}</StyledInfo>
                 </Box>
                 <Box display="flex" alignItems="center">
                   <SchoolIcon />
-                  <StyledInfo>Bsc in Swe</StyledInfo>
+                  <StyledInfo>{user.degree}</StyledInfo>
                 </Box>
                 <Box display="flex" alignItems="center">
                   <LocationOnIcon />
-                  <StyledInfo>105, shantinogor, Dhaka</StyledInfo>
+                  <StyledInfo>{user.chamberLocation}</StyledInfo>
                 </Box>
               </Box>
             </Box>

@@ -11,14 +11,14 @@ const styles = {
   flexGrow: "1",
 };
 
-const InfoCard = () => {
+const InfoCard = ({ value, label }) => {
   return (
     <Box className="shadow-1" style={styles} p={2}>
       <Typography variant="h2" align="center" style={{ fontWeight: "bold" }}>
-        20
+        {value}
       </Typography>
       <Typography variant="body1" align="center" style={{ marginTop: "10px" }}>
-        Tips Posted
+        {label.toUpperCase()}
       </Typography>
     </Box>
   );

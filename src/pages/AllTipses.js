@@ -18,7 +18,6 @@ const AllTipses = () => {
     try {
       dispatch({ type: "START_FETCH_TIPS" });
       const { data } = await Axios.get(`${process.env.REACT_APP_API}/tips/all`);
-      console.log("tips fetched length, ", data.length);
       dispatch({ type: "FINISH_FETCH_TIPS", payload: data });
       //keep 10 data to render
       setTipsData(data.slice(0, 6));
@@ -49,7 +48,7 @@ const AllTipses = () => {
     }
     setTipsData(tipses.allTips);
     setHaseMore(false);
-  }, [fetchTips, tipses.allTips]);
+  }, [tipses.allTips]);
 
   return (
     <div>

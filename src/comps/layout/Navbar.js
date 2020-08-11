@@ -34,7 +34,7 @@ const Navbar = ({ children }) => {
           <>
             <MobileMenuLink to="/add/tips" label="ADD TIPS" mb />
             <MobileMenuLink to="/add/medicine" label="ADD Medicine" mb />
-            <MobileMenuLink to="/profile" label="Profile" mb />
+            <MobileMenuLink to={`/profile/${user.id}`} label="Profile" mb />
             <Button
               variant="contained"
               color="secondary"
@@ -96,7 +96,7 @@ const Navbar = ({ children }) => {
                 <>
                   <NavLink to="/add/tips" label="ADD TIPS" />
                   <NavLink to="/add/medicine" label="Add Medicine" />
-                  <NavLink to="/profile" label="Profile" />
+                  <NavLink to={`/profile/${user.id}`} label="Profile" />
                   <Button
                     variant="contained"
                     color="secondary"
