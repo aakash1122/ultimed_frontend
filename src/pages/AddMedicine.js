@@ -29,9 +29,9 @@ const AddMedicine = () => {
     try {
       if (name && groupName && company && price && packSize && desc) {
         const data = { name, groupName, company, price, packSize, desc };
+        console.log(data);
         setLoading(true);
         const user = JSON.parse(localStorage.getItem("user"));
-        console.log(user);
         const resp = await Axios.post(
           `${process.env.REACT_APP_API}/medicine/add`,
           data,
@@ -44,6 +44,7 @@ const AddMedicine = () => {
 
         if (resp.status === 201) {
           setSuccess(true);
+          console.log(resp);
         }
       }
       setLoading(false);

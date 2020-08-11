@@ -56,8 +56,6 @@ const MedDetail = () => {
 
   if (error) return <h5>Error Occured</h5>;
 
-  console.log(data);
-
   const med = data.data;
 
   return (
@@ -94,7 +92,11 @@ const MedDetail = () => {
               </Typography>
             </AccordionSummary>
             <AccordionDetails>
-              <Typography>{med.desc}</Typography>
+              <div
+                style={{ padding: "20px 0px", lineHeight: " 30px" }}
+                dangerouslySetInnerHTML={{ __html: med.desc }}
+                id="tips-body"
+              ></div>
             </AccordionDetails>
           </Accordion>
         </CardContent>
