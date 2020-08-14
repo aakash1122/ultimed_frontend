@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   Card,
   CardActions,
@@ -10,6 +10,7 @@ import {
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 import { useHistory } from "react-router-dom";
+import { MyContext } from "context/context";
 
 const styles = makeStyles((theme) => ({
   root: {
@@ -35,6 +36,7 @@ const styles = makeStyles((theme) => ({
 const TipsCard = ({ data }) => {
   const history = useHistory();
   const classes = styles();
+  const [state] = useContext(MyContext);
 
   return (
     <Card className={classes.root}>
@@ -62,6 +64,14 @@ const TipsCard = ({ data }) => {
         >
           Read More
         </Button>
+        {data.author._id === state.user.id ? (
+          <Button
+            color="primary"
+            onClick={() => history.push(`/tips/update`, { data })}
+          >
+            Edit
+          </Button>
+        ) : null}
       </CardActions>
     </Card>
   );
