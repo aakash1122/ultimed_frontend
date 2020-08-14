@@ -11,7 +11,7 @@ import ReactQuill from "react-quill";
 import styled from "styled-components";
 import "react-quill/dist/quill.snow.css";
 import { useForm } from "react-hook-form";
-import { useHistory } from "react-router-dom";
+import { useHistory, Redirect } from "react-router-dom";
 
 import MessageShow from "comps/MessageShow";
 import ViewTips from "comps/ViewTips";
@@ -19,13 +19,10 @@ import Axios from "axios";
 import { MyContext } from "context/context";
 
 const UpdateTips = () => {
-  const {
-    location: {
-      state: { data },
-    },
-  } = useHistory();
-
   const { register, handleSubmit, setValue, watch, errors } = useForm();
+  const history = useHistory();
+
+  const data = history?.location?.state?.data || {};
 
   const [state] = useContext(MyContext);
   const [loading, setLoading] = useState(false);
@@ -43,7 +40,7 @@ const UpdateTips = () => {
       },
     });
     setValue("desc", data.desc);
-  }, [register]);
+  }, [register, setValue]);
 
   const handleChange = (value) => {
     setValue("desc", value);
@@ -74,6 +71,7 @@ const UpdateTips = () => {
       if (resp.status === 201) {
         alert("Post Updated");
         resetForm();
+        window.location.replace(`/all-tipses/${data._id}`);
       }
       setLoading(false);
     } catch (error) {
@@ -82,6 +80,16 @@ const UpdateTips = () => {
       setLoading(false);
     }
   };
+
+  // redirect if no data passed with router
+  if (Object.keys(data).length === 0)
+    return (
+      <Redirect
+        to={{
+          pathname: "/all-tipses",
+        }}
+      />
+    );
 
   return (
     <div>
@@ -107,7 +115,7 @@ const UpdateTips = () => {
                   placeholder="Give Tips a title."
                   fullWidth
                   name="title"
-                  defaultValue={data.title}
+                  defaultValue={data.title || ""}
                   inputRef={register({
                     required: {
                       value: true,
@@ -131,7 +139,7 @@ const UpdateTips = () => {
                   type="url"
                   fullWidth
                   name="imageUrl"
-                  defaultValue={data.imageUrl}
+                  defaultValue={data.imageUrl || ""}
                   inputRef={register({
                     required: {
                       value: true,
@@ -154,7 +162,7 @@ const UpdateTips = () => {
                   toolbar
                   theme="snow"
                   minLength="100"
-                  defaultValue={data.desc}
+                  defaultValue={data.desc || ""}
                   onChange={handleChange}
                   placeholder="Write tips here"
                 />

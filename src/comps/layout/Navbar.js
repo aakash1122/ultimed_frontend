@@ -105,7 +105,7 @@ const Navbar = ({ children }) => {
                     onClick={() => {
                       dispatch({ type: "LOGOUT" });
                       localStorage.removeItem("user");
-                      history.push("/login");
+                      window.location.replace("/login");
                     }}
                   >
                     {" "}
