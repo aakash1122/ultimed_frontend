@@ -1,8 +1,11 @@
 import React from "react";
-import { Card, CardHeader, Avatar, Divider } from "@material-ui/core";
+import { Card, CardHeader, Avatar, Divider, Button } from "@material-ui/core";
 import styled from "styled-components";
+import { useHistory } from "react-router-dom";
 
 const ViewTips = ({ data }) => {
+  const history = useHistory();
+
   return (
     <>
       {data.title || data.desc ? (
@@ -25,6 +28,16 @@ const ViewTips = ({ data }) => {
               }
               title={data.author.name.toUpperCase()}
               subheader={new Date(data.created_at).toDateString()}
+              action={
+                <Button
+                  variant="outlined"
+                  size="large"
+                  color="primary"
+                  onClick={() => history.push(`/profile/${data.author._id}`)}
+                >
+                  Profile
+                </Button>
+              }
               style={{ padding: "15px 0px" }}
             />
           </>
