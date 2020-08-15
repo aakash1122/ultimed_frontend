@@ -7,6 +7,8 @@ import {
   Typography,
   Box,
   CircularProgress,
+  CardActionArea,
+  CardActions,
 } from "@material-ui/core";
 import Accordion from "@material-ui/core/Accordion";
 import AccordionSummary from "@material-ui/core/AccordionSummary";
@@ -14,9 +16,10 @@ import AccordionDetails from "@material-ui/core/AccordionDetails";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
+import Axios from "axios";
 
 import logo3 from "assets/logo3.png";
-import Axios from "axios";
+import DeleteItem from "comps/DeleteItem";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -100,6 +103,9 @@ const MedDetail = (props) => {
             </AccordionDetails>
           </Accordion>
         </CardContent>
+        <CardActions>
+          <DeleteItem id={med._id} type="medicine" />
+        </CardActions>
       </Card>
     </>
   );

@@ -20,7 +20,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const DeleteTips = ({ id }) => {
+const route = {
+  tips: "/tips/delete",
+  medicine: "/medicine/delete",
+};
+
+const DeleteItem = ({ id, type }) => {
   const classes = useStyles();
   const [isOpen, setIsOpen] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -31,29 +36,36 @@ const DeleteTips = ({ id }) => {
   if (!isAdmin) return null;
 
   const handleDelete = async () => {
-    setLoading(true);
-    // perform delete request
-    const resp = await axios.delete(
-      `${process.env.REACT_APP_API}/tips/delete`,
-      {
-        headers: {
-          authorization: `bearer ${state.user.token}`,
-        },
-        params: {
-          id,
-        },
+    try {
+      setLoading(true);
+      // perform delete request
+      const resp = await axios.delete(
+        `${process.env.REACT_APP_API}${route[type]}`,
+        {
+          headers: {
+            authorization: `bearer ${state.user.token}`,
+          },
+          params: {
+            id,
+          },
+        }
+      );
+      if (resp.data.deletedCount) {
+        setIsOpen(false);
+        setLoading(false);
+        alert(`${type} Deleted successfully`);
+        if (type === "tips") {
+          window.location.replace("/all-tipses");
+        }
+        if (type === "medicine") {
+          window.location.replace("/all-meds");
+        }
       }
-    );
-
-    if (resp.data.deletedCount) {
+    } catch (error) {
       setIsOpen(false);
-      alert("Tips Deleted");
-      window.location.replace("/all-tipses");
-    } else {
-      setIsOpen(false);
-      window.Error("Something went wrong");
+      setLoading(false);
+      alert("Something went wrong", error);
     }
-    setLoading(false);
   };
 
   return (
@@ -66,7 +78,7 @@ const DeleteTips = ({ id }) => {
         size="large"
         style={{ display: "block", marginTop: "20px" }}
       >
-        Delete Tips
+        Delete {type}
       </Button>
       <Modal
         open={isOpen}
@@ -110,4 +122,4 @@ const DeleteTips = ({ id }) => {
   );
 };
 
-export default DeleteTips;
+export default DeleteItem;
