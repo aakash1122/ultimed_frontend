@@ -2,6 +2,7 @@ import React from "react";
 import { Card, CardHeader, Avatar, Divider, Button } from "@material-ui/core";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
+import DeleteTips from "./DeleteTips";
 
 const ViewTips = ({ data }) => {
   const history = useHistory();
@@ -40,6 +41,7 @@ const ViewTips = ({ data }) => {
               }
               style={{ padding: "15px 0px" }}
             />
+            <DeleteTips id={data._id} />
           </>
         </Card>
       ) : null}

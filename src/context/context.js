@@ -50,6 +50,7 @@ const reducer = (state = initalState, action) => {
           name: action.payload.data.name,
           email: action.payload.data.email,
           token: action.payload.token,
+          isAdmin: action.payload.data.isAdmin,
         },
       };
     case "LOGOUT":
