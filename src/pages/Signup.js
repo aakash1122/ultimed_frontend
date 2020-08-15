@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   TextField,
   Button,
@@ -16,9 +16,11 @@ import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import styled from "styled-components";
 import { useForm } from "react-hook-form";
 import axios from "axios";
+import { useHistory } from "react-router-dom";
 
 import logo from "assets/logo3.png";
 import SnackbarMessage from "comps/SnackbarMessage";
+import { MyContext } from "context/context";
 
 const styles = makeStyles((theme) => ({
   inp: {
@@ -54,6 +56,15 @@ const Signup = () => {
   const [duplicateUser, setDuplicateUser] = useState(false);
 
   const { register, handleSubmit, errors } = useForm();
+
+  const [state] = useContext(MyContext);
+  const history = useHistory();
+
+  useEffect(() => {
+    if (state.user.loggedIn) {
+      history.push("/");
+    }
+  });
 
   const defaultState = () => {
     setCreated(false);

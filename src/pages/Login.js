@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import {
   TextField,
   Button,
@@ -58,6 +58,13 @@ const Login = () => {
   const [state, dispatch] = useContext(MyContext);
 
   const classes = styles();
+
+  //  if already logged in then redirect
+  useEffect(() => {
+    if (state.user.loggedIn) {
+      history.push("/");
+    }
+  });
 
   const handleLogin = async (e) => {
     e.preventDefault();

@@ -32,8 +32,10 @@ const Navbar = ({ children }) => {
         <MobileMenuLink to="/all-tipses" label="All Tipses" mb />
         {user.loggedIn ? (
           <>
+            {user.isAdmin ? (
+              <MobileMenuLink to="/add/medicine" label="ADD Medicine" mb />
+            ) : null}
             <MobileMenuLink to="/add/tips" label="ADD TIPS" mb />
-            <MobileMenuLink to="/add/medicine" label="ADD Medicine" mb />
             <MobileMenuLink to={`/profile/${user.id}`} label="Profile" mb />
             <Button
               variant="contained"
@@ -95,7 +97,9 @@ const Navbar = ({ children }) => {
               {user.loggedIn ? (
                 <>
                   <NavLink to="/add/tips" label="ADD TIPS" />
-                  <NavLink to="/add/medicine" label="Add Medicine" />
+                  {user.isAdmin ? (
+                    <NavLink to="/add/medicine" label="Add Medicine" />
+                  ) : null}
                   <NavLink to={`/profile/${user.id}`} label="Profile" />
                   <Button
                     variant="contained"
