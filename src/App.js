@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import Navbar from "comps/layout/Navbar";
@@ -14,18 +14,25 @@ import ViewTipsDetail from "pages/ViewTipsDetail";
 import AddMedicine from "pages/AddMedicine";
 import UpdateMed from "pages/UpdateMed";
 import UpdateTips from "pages/UpdateTips";
+import ProtectedRoute from "comps/ProtectedRoute";
 
 import { MyContext } from "context/context";
+import AdminRoute from "comps/AdminRoute";
 
 function App() {
   const [state, dispatch] = useContext(MyContext);
+
+  const [loading, setLoadin] = useState(true);
 
   useEffect(() => {
     const user = localStorage.getItem("user");
     if (user) {
       dispatch({ type: "FINISH_LOGIN", payload: JSON.parse(user) });
     }
+    setLoadin(false);
   }, [dispatch]);
+
+  if (loading) return null;
 
   return (
     <div className="App">
@@ -44,21 +51,21 @@ function App() {
             <Route path="/all-tipses" exact>
               <AllTipses />
             </Route>
-            <Route path="/add/tips" exact>
+            <ProtectedRoute path="/add/tips" exact>
               <AddTips />
-            </Route>
-            <Route path="/add/medicine" exact>
+            </ProtectedRoute>
+            <AdminRoute path="/add/medicine" exact>
               <AddMedicine />
-            </Route>
+            </AdminRoute>
             <Route path="/med/update/" exact>
               <UpdateMed />
             </Route>
             <Route path="/all-tipses/:id" exact>
               <ViewTipsDetail />
             </Route>
-            <Route path="/tips/update/" exact>
+            <ProtectedRoute path="/tips/update/" exact>
               <UpdateTips />
-            </Route>
+            </ProtectedRoute>
             <Route path="/login" exact>
               <Login />
             </Route>

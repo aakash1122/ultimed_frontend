@@ -9,6 +9,7 @@ const initalState = {
     name: "",
     email: "",
     token: "",
+    isAdmin: false,
     loading: false,
   },
   tipses: {
