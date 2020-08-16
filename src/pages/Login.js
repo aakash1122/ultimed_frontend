@@ -69,6 +69,7 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     setError(false);
+    dispatch({ type: "START_LOGIN" });
     if (email && password) {
       try {
         const resp = await axios.post(
@@ -87,6 +88,7 @@ const Login = () => {
       } catch (error) {
         console.log(error);
         setError(true);
+        dispatch({ type: "FAIL_LOGIN" });
       }
     }
   };

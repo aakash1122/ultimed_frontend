@@ -54,6 +54,14 @@ const reducer = (state = initalState, action) => {
           isAdmin: action.payload.data.isAdmin,
         },
       };
+    case "FAIL_LOGIN":
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          loading: false,
+        },
+      };
     case "LOGOUT":
       return {
         ...state,
