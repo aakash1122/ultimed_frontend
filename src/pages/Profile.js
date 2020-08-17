@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import styled from "styled-components";
 import { useQuery } from "react-query";
 import { Grid, Typography, CircularProgress } from "@material-ui/core";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 
 import ProfileCard from "comps/ProfileCard";
 import InfoCard from "comps/InfoCard";
@@ -12,6 +12,8 @@ import { MyContext } from "context/context";
 
 const Profile = () => {
   const { id } = useParams();
+  const history = useHistory();
+
   const [state] = useContext(MyContext);
   const { user } = state;
 
@@ -31,7 +33,6 @@ const Profile = () => {
   if (error) {
     return <h5>Something Went Wrong</h5>;
   }
-  console.log(data);
 
   return (
     <div>
@@ -47,6 +48,7 @@ const Profile = () => {
             })}
         </InfoWrapper>
       ) : null}
+
       {data.data.profile.tipses.length > 0 ? (
         <TipsWrapper>
           <Typography variant="h5" style={{ margin: "35px 0px 20px" }}>

@@ -18,6 +18,8 @@ import ProtectedRoute from "comps/ProtectedRoute";
 
 import { MyContext } from "context/context";
 import AdminRoute from "comps/AdminRoute";
+import AllUsers from "pages/AllUsers";
+import { NoMatch } from "comps/NoMatch";
 
 function App() {
   const [state, dispatch] = useContext(MyContext);
@@ -74,6 +76,12 @@ function App() {
             </Route>
             <Route path="/profile/:id" exact>
               <Profile />
+            </Route>
+            <AdminRoute path="/users/all" exact>
+              <AllUsers />
+            </AdminRoute>
+            <Route path="*">
+              <NoMatch />
             </Route>
           </Switch>
         </Navbar>
