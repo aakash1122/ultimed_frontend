@@ -89,7 +89,7 @@ const Signup = () => {
     } catch (error) {
       console.log(error.response);
       if (error.response.status === 409) {
-        return setDuplicateUser(true);
+        setDuplicateUser(true);
       } else if (error.response.status === 500) {
         alert("something Went Wrong");
       } else {

@@ -56,7 +56,9 @@ const AddMedicine = () => {
   };
 
   if (loading) {
-    return <CircularProgress />;
+    return (
+      <CircularProgress style={{ display: "block", margin: "20px auto" }} />
+    );
   }
 
   return (

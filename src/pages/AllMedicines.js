@@ -74,7 +74,7 @@ const AllMedicines = () => {
         ALL Medicines
       </Typography>
       {meds.loading ? (
-        <CircularProgress style={{ display: "block", margin: "auto" }} />
+        <CircularProgress style={{ display: "block", margin: "20px auto" }} />
       ) : (
         <InfiniteScroll
           dataLength={medData} //This is important field to render the next data
