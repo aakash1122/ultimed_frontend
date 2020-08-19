@@ -7,36 +7,31 @@ import {
   Typography,
   Box,
   CircularProgress,
-  CardActionArea,
   CardActions,
+  Divider,
 } from "@material-ui/core";
-import Accordion from "@material-ui/core/Accordion";
-import AccordionSummary from "@material-ui/core/AccordionSummary";
-import AccordionDetails from "@material-ui/core/AccordionDetails";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+
 import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 import Axios from "axios";
+import styled from "styled-components";
 
 import logo3 from "assets/logo3.png";
 import DeleteItem from "comps/DeleteItem";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    position: "absolute",
-    width: 450,
+    overflow: "auto",
     padding: theme.spacing(3, 4, 3),
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
     borderRadius: "10px",
     [theme.breakpoints.down("sm")]: {
       width: "100%",
     },
   },
   heading: {
-    fontSize: theme.typography.pxToRem(15),
+    fontSize: theme.typography.pxToRem(18),
     fontWeight: theme.typography.fontWeightRegular,
+    margin: "20px 0px",
   },
   detail: {
     background: "#f7f7f7",
@@ -44,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const MedDetail = (props) => {
+const MedDetail = () => {
   const classes = useStyles();
   const { id } = useParams();
 
@@ -75,33 +70,38 @@ const MedDetail = (props) => {
         <CardContent>
           <Box style={{ margin: "10px 0px", padding: "5px" }}>
             <Typography
-              variant="h6"
-              style={{ textAlign: "center", marginBottom: "5px" }}
+              variant="h4"
+              style={{
+                textAlign: "center",
+                marginBottom: "20px",
+                textTransform: "capitalize",
+              }}
             >
               {med.name}
             </Typography>
-            <Typography variant="body1">Group : {med.groupName}</Typography>
-            <Typography variant="body2">Company : {med.company}</Typography>
-            <Typography variant="body2">Unit price : {med.price}</Typography>
-            <Typography variant="body2">Pack Size : {med.packSize} </Typography>
+            <Label variant="h6">
+              Group : <span>{med.groupName}</span>
+            </Label>
+            <Label variant="h6">
+              Company : <span>{med.company}</span>
+            </Label>
+            <Label variant="h6">
+              Unit price : <span>{med.price} TK</span>
+            </Label>
+            <Label variant="h6">
+              Pack Size : <span>{med.packSize}</span>{" "}
+            </Label>
           </Box>
-          <Accordion className={classes.detail}>
-            <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
-              aria-controls="panel1a-content"
-            >
-              <Typography className={classes.heading}>
-                Detail Information{" "}
-              </Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-              <div
-                style={{ padding: "20px 0px", lineHeight: " 30px" }}
-                dangerouslySetInnerHTML={{ __html: med.desc }}
-                id="tips-body"
-              ></div>
-            </AccordionDetails>
-          </Accordion>
+          <Divider style={{ marginTop: "20px" }} />
+          <Typography className={classes.heading} align="center">
+            Detail Information{" "}
+          </Typography>
+
+          <Box
+            style={{ padding: "20px 0px", lineHeight: " 30px" }}
+            dangerouslySetInnerHTML={{ __html: med.desc }}
+            id="tips-body"
+          ></Box>
         </CardContent>
         <CardActions>
           <DeleteItem id={med._id} type="medicine" />
@@ -112,3 +112,13 @@ const MedDetail = (props) => {
 };
 
 export default MedDetail;
+
+const Label = styled(Typography)`
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 30px;
+  > span {
+    font-weight: normal;
+    padding-left: 10px;
+  }
+`;

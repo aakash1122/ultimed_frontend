@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import styled from "styled-components";
 import { useQuery } from "react-query";
 import { Grid, Typography, CircularProgress } from "@material-ui/core";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 import ProfileCard from "comps/ProfileCard";
 import InfoCard from "comps/InfoCard";
@@ -12,7 +12,6 @@ import { MyContext } from "context/context";
 
 const Profile = () => {
   const { id } = useParams();
-  const history = useHistory();
 
   const [state] = useContext(MyContext);
   const { user } = state;

@@ -52,7 +52,7 @@ const MedCard = ({ data }) => {
         <Typography variant="body2">
           Group <StyledValue>{data.groupName}</StyledValue>
         </Typography>
-        <Typography variant="body2">
+        <Typography variant="body2" noWrap>
           Company
           <StyledValue>{data.company}</StyledValue>
         </Typography>
@@ -89,7 +89,7 @@ export default MedCard;
 const StyledValue = styled.span`
   margin: 2px 0px 2px 5px;
   display: inline-block;
-  font-weight: bold;
+  font-weight: 600;
   text-transform: uppercase;
-  color: #3f51b5;
+  color: #6f665b;
 `;
