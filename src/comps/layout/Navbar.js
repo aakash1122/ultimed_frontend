@@ -10,7 +10,6 @@ import CancelIcon from "@material-ui/icons/Cancel";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 
-import Logo from "assets/logo2.png";
 import NavLink from "comps/StyledLink";
 
 import { MyContext } from "context/context";
@@ -137,18 +136,16 @@ const Navbar = ({ children }) => {
 export default Navbar;
 
 const MobileMenuWrapper = styled.div`
-  height: ${(props) => (props.open ? "auto" : "0px !important")};
-  width: ${(props) => (props.open ? "auto" : "0px")};
+  position: absolute;
+  height: ${(props) => (props.open ? "100vh" : "0px !important")};
+  width: ${(props) => (props.open ? "100vw" : "0px")};
   overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   margin-left: auto;
-  position: absolute;
   background: #3f51b5;
-  height: 100vh;
-  width: 100vw;
   z-index: 999;
   transition: all 0.4s cubic-bezier(0, 0.79, 0.46, 1.07);
 `;

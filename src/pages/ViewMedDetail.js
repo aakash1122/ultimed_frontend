@@ -26,6 +26,7 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: "10px",
     [theme.breakpoints.down("sm")]: {
       width: "100%",
+      padding: 0,
     },
   },
   heading: {
@@ -57,57 +58,55 @@ const MedDetail = () => {
   const med = data.data;
 
   return (
-    <>
-      <Card className={classes.root}>
-        <CardMedia
-          component="img"
-          alt="Contemplative Reptile"
-          height="140"
-          image={logo3}
-          title="Contemplative Reptile"
-          style={{ objectFit: "contain" }}
-        />
-        <CardContent>
-          <Box style={{ margin: "10px 0px", padding: "5px" }}>
-            <Typography
-              variant="h4"
-              style={{
-                textAlign: "center",
-                marginBottom: "20px",
-                textTransform: "capitalize",
-              }}
-            >
-              {med.name}
-            </Typography>
-            <Label variant="h6">
-              Group : <span>{med.groupName}</span>
-            </Label>
-            <Label variant="h6">
-              Company : <span>{med.company}</span>
-            </Label>
-            <Label variant="h6">
-              Unit price : <span>{med.price} TK</span>
-            </Label>
-            <Label variant="h6">
-              Pack Size : <span>{med.packSize}</span>{" "}
-            </Label>
-          </Box>
-          <Divider style={{ marginTop: "20px" }} />
-          <Typography className={classes.heading} align="center">
-            Detail Information{" "}
+    <Card className={classes.root}>
+      <CardMedia
+        component="img"
+        alt="Contemplative Reptile"
+        height="140"
+        image={logo3}
+        title="Contemplative Reptile"
+        style={{ objectFit: "contain" }}
+      />
+      <CardContent>
+        <Box style={{ margin: "10px 0px", padding: "5px" }}>
+          <Typography
+            variant="h4"
+            style={{
+              textAlign: "center",
+              marginBottom: "20px",
+              textTransform: "capitalize",
+            }}
+          >
+            {med.name}
           </Typography>
+          <Label variant="h6">
+            Group : <span>{med.groupName}</span>
+          </Label>
+          <Label variant="h6">
+            Company : <span>{med.company}</span>
+          </Label>
+          <Label variant="h6">
+            Unit price : <span>{med.price} TK</span>
+          </Label>
+          <Label variant="h6">
+            Pack Size : <span>{med.packSize}</span>{" "}
+          </Label>
+        </Box>
+        <Divider style={{ marginTop: "20px" }} />
+        <Typography className={classes.heading} align="center">
+          Detail Information{" "}
+        </Typography>
 
-          <Box
-            style={{ padding: "20px 0px", lineHeight: " 30px" }}
-            dangerouslySetInnerHTML={{ __html: med.desc }}
-            id="tips-body"
-          ></Box>
-        </CardContent>
-        <CardActions>
-          <DeleteItem id={med._id} type="medicine" />
-        </CardActions>
-      </Card>
-    </>
+        <Box
+          style={{ padding: "20px 0px", lineHeight: " 30px" }}
+          dangerouslySetInnerHTML={{ __html: med.desc }}
+          id="tips-body"
+        ></Box>
+      </CardContent>
+      <CardActions>
+        <DeleteItem id={med._id} type="medicine" />
+      </CardActions>
+    </Card>
   );
 };
 
