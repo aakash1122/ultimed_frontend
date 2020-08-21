@@ -110,6 +110,14 @@ const reducer = (state = initalState, action) => {
           allMeds: action.payload,
         },
       };
+    case "FINISH_FETCH_MORE_MED":
+      return {
+        ...state,
+        meds: {
+          ...state.meds,
+          allMeds: [...state.meds.allMeds, ...action.payload],
+        },
+      };
     case "ERROR_FETCH_MED":
       return {
         ...state,

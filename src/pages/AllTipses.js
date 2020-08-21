@@ -19,9 +19,17 @@ const AllTipses = () => {
       dispatch({ type: "START_FETCH_TIPS" });
       const { data } = await Axios.get(`${process.env.REACT_APP_API}/tips/all`);
       dispatch({ type: "FINISH_FETCH_TIPS", payload: data });
-      //keep 10 data to render
-      setTipsData(data.slice(0, 6));
-      if (data.length < 6) return setHaseMore(false);
+      //keep 6 data to render
+      if (data.length < 6) {
+        setTipsData(data);
+        setHaseMore(false);
+      } else {
+        setTipsData(data.slice(0, 6));
+      }
+
+      // setTipsData(data.slice(0, 6));
+      // console.log(data.length);
+      // if (data.length < 6) return setHaseMore(false);
     } catch (error) {
       dispatch({ type: "ERROR_FETCH_TIPS", payload: error });
     }
