@@ -18,14 +18,12 @@ const styles = makeStyles((theme) => ({
   root: {
     minWidth: "270px",
     Width: "270px",
-    borderRadius: "15px",
+    borderRadius: "5px",
     padding: "10px",
-    boxShadow: "0px 5px 10px -2px #c2c2c2",
     margin: "5px 5px",
     transition: "all 0.3s ease",
     " &:hover": {
-      transform: "translateY(2px)",
-      boxShadow: "none",
+      boxShadow: "0px 5px 10px -2px #c2c2c2",
     },
   },
 }));
@@ -50,11 +48,20 @@ const MedCard = ({ data }) => {
       <CardContent>
         <Typography variant="h6">{data.name.toUpperCase()}</Typography>
         <Typography variant="body2">
-          Group <StyledValue>{data.groupName}</StyledValue>
+          Group{" "}
+          <StyledValue>
+            {data.groupName
+              .slice(0, 12)
+              .concat(data.groupName.length >= 12 ? " ..." : "")}
+          </StyledValue>
         </Typography>
-        <Typography variant="body2" noWrap>
+        <Typography variant="body2">
           Company
-          <StyledValue>{data.company}</StyledValue>
+          <StyledValue>
+            {data.company
+              .slice(0, 12)
+              .concat(data.company.length >= 12 ? " ..." : "")}
+          </StyledValue>
         </Typography>
         <Typography variant="body2">
           Price <StyledValue>{data.price}</StyledValue>
