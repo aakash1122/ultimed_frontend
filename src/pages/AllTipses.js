@@ -11,52 +11,46 @@ const AllTipses = () => {
   // pull out tipses object from state
   const { tipses } = state;
 
-  const [tipsData, setTipsData] = useState([]);
   const [hasMore, setHaseMore] = useState(true);
 
   const fetchTips = async () => {
     try {
-      dispatch({ type: "START_FETCH_TIPS" });
-      const { data } = await Axios.get(`${process.env.REACT_APP_API}/tips/all`);
+      dispatch({ type: "START_FETCH_Tips" });
+      const page = Math.ceil(tipses.allTips.length / 6) + 1;
+      const { data } = await Axios.get(
+        `${process.env.REACT_APP_API}/tips/all`,
+        {
+          params: { page },
+        }
+      );
       dispatch({ type: "FINISH_FETCH_TIPS", payload: data });
-      //keep 6 data to render
-      if (data.length < 6) {
-        setTipsData(data);
-        setHaseMore(false);
-      } else {
-        setTipsData(data.slice(0, 6));
-      }
-
-      // setTipsData(data.slice(0, 6));
-      // console.log(data.length);
-      // if (data.length < 6) return setHaseMore(false);
+      if (data.length < 6) return setHaseMore(false);
     } catch (error) {
       dispatch({ type: "ERROR_FETCH_TIPS", payload: error });
     }
   };
 
-  const fetchMore = () => {
-    console.log("fetching again");
-    setTimeout(() => {
-      if (tipses.allTips.length === tipsData.length) {
-        return setHaseMore(false);
-      }
-      setTipsData(
-        tipsData.concat(
-          tipses.allTips.slice(tipsData.length, tipsData.length + 6)
-        )
-      );
-    }, 600);
-  };
-
   useEffect(() => {
-    // * if data available then dont fetch
-    if (!tipses.allTips.length > 0) {
+    if (!tipses.allTips.length) {
       fetchTips();
     }
-    setTipsData(tipses.allTips);
-    setHaseMore(false);
-  }, [tipses.allTips]);
+  }, []);
+
+  const fetchMore = async () => {
+    try {
+      const page = Math.ceil(tipses.allTips.length / 6) + 1;
+      const { data } = await Axios.get(
+        `${process.env.REACT_APP_API}/tips/all`,
+        {
+          params: { page },
+        }
+      );
+      dispatch({ type: "FINISH_FETCH_MORE_TIPS", payload: data });
+      if (data.length < 8) return setHaseMore(false);
+    } catch (error) {
+      dispatch({ type: "ERROR_FETCH_TIPS", payload: error });
+    }
+  };
 
   return (
     <div>
@@ -75,7 +69,7 @@ const AllTipses = () => {
         <CircularProgress style={{ display: "block", margin: "auto" }} />
       ) : (
         <InfiniteScroll
-          dataLength={tipsData} //This is important field to render the next data
+          dataLength={tipses.allTips.length} //This is important field to render the next data
           next={fetchMore}
           hasMore={hasMore}
           loader={
@@ -91,11 +85,12 @@ const AllTipses = () => {
           style={{ overflow: "hidden" }}
         >
           <Grid container spacing={2} direction="row" alignItems="center">
-            {tipsData.map((item) => (
-              <Grid item xs={12} sm={6} md={4} key={item._id}>
-                <TipsCard data={item} />
-              </Grid>
-            ))}
+            {tipses.allTips.length &&
+              tipses.allTips.map((item) => (
+                <Grid item xs={12} sm={6} md={4} key={item._id}>
+                  <TipsCard data={item} />
+                </Grid>
+              ))}
           </Grid>
         </InfiniteScroll>
       )}

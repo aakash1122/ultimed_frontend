@@ -145,6 +145,14 @@ const reducer = (state = initalState, action) => {
           allTips: action.payload,
         },
       };
+    case "FINISH_FETCH_MORE_TIPS":
+      return {
+        ...state,
+        tipses: {
+          ...state.tipses,
+          allTips: [...state.tipses.allTips, ...action.payload],
+        },
+      };
     case "FAIL_FETCH_TIPS":
       return {
         ...state,
