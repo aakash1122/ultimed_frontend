@@ -80,7 +80,7 @@ const Signup = () => {
         `${process.env.REACT_APP_API}/auth/signup`,
         data
       );
-      console.log(resp);
+
       if (resp.status === 201) {
         // all okay
         setCreated(true);

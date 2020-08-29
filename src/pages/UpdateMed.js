@@ -61,7 +61,6 @@ const UpdateMed = () => {
         }
         if (resp.status === 201) {
           setSuccess(true);
-          console.log(resp);
         }
       }
       setLoading(false);

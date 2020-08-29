@@ -50,6 +50,7 @@ const DeleteItem = ({ id, type }) => {
           },
         }
       );
+
       if (resp.data.deletedCount) {
         setIsOpen(false);
         setLoading(false);

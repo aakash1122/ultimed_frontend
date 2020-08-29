@@ -7,11 +7,9 @@ import { MyContext } from "context/context";
 import { CircularProgress, Grid } from "@material-ui/core";
 
 const Home = () => {
-  const [state, dispatch] = useContext(MyContext);
+  const [state] = useContext(MyContext);
 
   const { search } = state;
-
-  console.log(search.data);
 
   return (
     <div>

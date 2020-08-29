@@ -7,8 +7,6 @@ const ProtectedRoute = ({ children, rest }) => {
 
   const { user } = state;
 
-  console.log(user.isAdmin);
-
   return (
     <Route
       {...rest}

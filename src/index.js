@@ -9,13 +9,11 @@ import { THEME } from "theme/provider";
 import AppContext from "context/context";
 
 ReactDOM.render(
-  <React.StrictMode>
-    <ThemeProvider theme={THEME}>
-      <AppContext>
-        <App />
-      </AppContext>
-    </ThemeProvider>
-  </React.StrictMode>,
+  <ThemeProvider theme={THEME}>
+    <AppContext>
+      <App />
+    </AppContext>
+  </ThemeProvider>,
   document.getElementById("root")
 );
 

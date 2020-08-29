@@ -24,6 +24,7 @@ const AllTipses = () => {
         }
       );
       dispatch({ type: "FINISH_FETCH_TIPS", payload: data });
+
       if (data.length < 6) return setHaseMore(false);
     } catch (error) {
       dispatch({ type: "ERROR_FETCH_TIPS", payload: error });
@@ -46,7 +47,7 @@ const AllTipses = () => {
         }
       );
       dispatch({ type: "FINISH_FETCH_MORE_TIPS", payload: data });
-      if (data.length < 8) return setHaseMore(false);
+      if (data.length < 6) return setHaseMore(false);
     } catch (error) {
       dispatch({ type: "ERROR_FETCH_TIPS", payload: error });
     }

@@ -1,5 +1,4 @@
 import React, { useContext, useState } from "react";
-import styled from "styled-components";
 import { Grid, Button, Divider, CircularProgress } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 import Backdrop from "@material-ui/core/Backdrop";
@@ -119,9 +118,3 @@ const AllUsers = () => {
 };
 
 export default AllUsers;
-
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-`;

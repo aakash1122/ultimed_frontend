@@ -30,7 +30,6 @@ const initalState = {
 };
 
 const reducer = (state = initalState, action) => {
-  console.log("reducer called", action);
   switch (action.type) {
     case "START_LOGIN":
       return {
